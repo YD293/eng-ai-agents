@@ -17,6 +17,8 @@ aenum==3.1.15
     # via lightly
 aiobotocore==2.14.0
     # via s3fs
+aiofiles==23.2.1
+    # via gradio
 aiohappyeyeballs==2.4.0
     # via aiohttp
 aiohttp==3.10.5
@@ -25,6 +27,7 @@ aiohttp==3.10.5
     # via dapr
     # via datasets
     # via fsspec
+    # via langchain
     # via s3fs
 aiohttp-retry==2.8.3
     # via dvc-http
@@ -44,8 +47,10 @@ antlr4-python3-runtime==4.9.3
     # via hydra-core
     # via omegaconf
 anyio==4.4.0
+    # via gradio
     # via httpx
     # via jupyter-server
+    # via starlette
 appdirs==1.4.4
     # via iterative-telemetry
 argon2-cffi==23.1.0
@@ -117,6 +122,7 @@ click==8.1.7
     # via histoprint
     # via ray
     # via typer
+    # via uvicorn
 click-didyoumean==0.3.1
     # via celery
 click-plugins==1.1.1
@@ -175,6 +181,8 @@ distlib==0.3.8
 distro==1.9.0
     # via dvc
     # via iterative-telemetry
+dnspython==2.7.0
+    # via pymongo
 dpath==2.2.0
     # via dvc
 dulwich==0.22.1
@@ -203,16 +211,20 @@ entrypoints==0.4
     # via gto
 executing==2.1.0
     # via stack-data
+fastapi==0.115.5
+    # via gradio
 fastjsonschema==2.20.0
     # via nbformat
 fastparquet==2024.5.0
+ffmpy==0.4.0
+    # via gradio
 filelock==3.15.4
     # via datasets
     # via huggingface-hub
     # via iterative-telemetry
     # via ray
     # via torch
-    # via triton
+    # via transformers
     # via virtualenv
 flatten-dict==0.4.2
     # via dvc
@@ -233,6 +245,7 @@ fsspec==2024.6.0
     # via dvc-http
     # via dvc-objects
     # via fastparquet
+    # via gradio-client
     # via huggingface-hub
     # via lightning
     # via pytorch-lightning
@@ -258,6 +271,9 @@ gitpython==3.1.43
     # via scmrepo
 googleapis-common-protos==1.65.0
     # via grpcio-status
+gradio==5.7.1
+gradio-client==1.5.0
+    # via gradio
 grandalf==0.8
     # via dvc
 graphviz==0.20.3
@@ -268,25 +284,43 @@ grpcio==1.66.1
     # via dapr
     # via grpcio-status
     # via grpcio-tools
+    # via qdrant-client
     # via tensorboard
 grpcio-status==1.66.1
     # via dapr
 grpcio-tools==1.64.1
+    # via qdrant-client
 gto==1.7.1
     # via dvc
     # via dvclive
 h11==0.14.0
     # via httpcore
+    # via uvicorn
+h2==4.1.0
+    # via httpx
 hist==2.8.0
 histoprint==2.4.0
     # via hist
+hpack==4.0.0
+    # via h2
 httpcore==1.0.5
     # via httpx
 httpx==0.27.2
+    # via gradio
+    # via gradio-client
     # via jupyterlab
-huggingface-hub==0.24.6
+    # via langsmith
+    # via ollama
+    # via qdrant-client
+    # via safehttpx
+huggingface-hub==0.26.3
     # via datasets
+    # via gradio
+    # via gradio-client
+    # via sentence-transformers
     # via timm
+    # via tokenizers
+    # via transformers
 hydra-colorlog==1.2.0
 hydra-core==1.3.2
     # via dvc
@@ -294,6 +328,8 @@ hydra-core==1.3.2
     # via hydra-optuna-sweeper
     # via lightly
 hydra-optuna-sweeper==1.2.0
+hyperframe==6.0.1
+    # via h2
 identify==2.6.0
     # via pre-commit
 idna==3.8
@@ -323,6 +359,7 @@ iterative-telemetry==0.0.8
 jedi==0.19.1
     # via ipython
 jinja2==3.1.4
+    # via gradio
     # via jupyter-server
     # via jupyterlab
     # via jupyterlab-server
@@ -336,7 +373,10 @@ joblib==1.4.2
     # via scikit-learn
 json5==0.9.25
     # via jupyterlab-server
+jsonpatch==1.33
+    # via langchain-core
 jsonpointer==3.0.0
+    # via jsonpatch
     # via jsonschema
 jsonschema==4.23.0
     # via clearml
@@ -392,6 +432,15 @@ kombu==5.4.0
     # via celery
     # via dvc
     # via dvc-task
+langchain==0.3.9
+langchain-core==0.3.21
+    # via langchain
+    # via langchain-text-splitters
+langchain-text-splitters==0.3.2
+    # via langchain
+langsmith==0.1.147
+    # via langchain
+    # via langchain-core
 lazy-loader==0.4
     # via scikit-image
 lightly==1.5.12
@@ -412,6 +461,7 @@ markdown==3.7
 markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
+    # via gradio
     # via jinja2
     # via mako
     # via nbconvert
@@ -469,7 +519,7 @@ numba==0.60.0
     # via pynndescent
     # via umap-learn
 numexpr==2.10.1
-numpy==2.0.2
+numpy==1.26.4
     # via boost-histogram
     # via bottleneck
     # via captum
@@ -478,9 +528,11 @@ numpy==2.0.2
     # via contourpy
     # via datasets
     # via fastparquet
+    # via gradio
     # via hist
     # via histoprint
     # via imageio
+    # via langchain
     # via lightly
     # via lightly-utils
     # via matplotlib
@@ -492,6 +544,7 @@ numpy==2.0.2
     # via pandas
     # via pyarrow
     # via pycocotools
+    # via qdrant-client
     # via scikit-image
     # via scikit-learn
     # via scipy
@@ -501,36 +554,10 @@ numpy==2.0.2
     # via tifffile
     # via torchmetrics
     # via torchvision
+    # via transformers
     # via uhi
     # via umap-learn
-nvidia-cublas-cu12==12.1.3.1
-    # via nvidia-cudnn-cu12
-    # via nvidia-cusolver-cu12
-    # via torch
-nvidia-cuda-cupti-cu12==12.1.105
-    # via torch
-nvidia-cuda-nvrtc-cu12==12.1.105
-    # via torch
-nvidia-cuda-runtime-cu12==12.1.105
-    # via torch
-nvidia-cudnn-cu12==9.1.0.70
-    # via torch
-nvidia-cufft-cu12==11.0.2.54
-    # via torch
-nvidia-curand-cu12==10.3.2.106
-    # via torch
-nvidia-cusolver-cu12==11.4.5.107
-    # via torch
-nvidia-cusparse-cu12==12.1.0.106
-    # via nvidia-cusolver-cu12
-    # via torch
-nvidia-nccl-cu12==2.20.5
-    # via torch
-nvidia-nvjitlink-cu12==12.6.68
-    # via nvidia-cusolver-cu12
-    # via nvidia-cusparse-cu12
-nvidia-nvtx-cu12==12.1.105
-    # via torch
+ollama==0.4.2
 omegaconf==2.3.0
     # via dvc
     # via hydra-core
@@ -541,6 +568,8 @@ orderedmultidict==1.0.1
     # via furl
 orjson==3.10.7
     # via dvc-data
+    # via gradio
+    # via langsmith
     # via sqltrie
 overrides==7.7.0
     # via jupyter-server
@@ -549,12 +578,15 @@ packaging==24.1
     # via deprecation
     # via dvc
     # via fastparquet
+    # via gradio
+    # via gradio-client
     # via huggingface-hub
     # via hydra-core
     # via ipykernel
     # via jupyter-server
     # via jupyterlab
     # via jupyterlab-server
+    # via langchain-core
     # via lazy-loader
     # via lightning
     # via lightning-utilities
@@ -567,9 +599,11 @@ packaging==24.1
     # via ray
     # via scikit-image
     # via torchmetrics
+    # via transformers
 pandas==2.2.2
     # via datasets
     # via fastparquet
+    # via gradio
     # via seaborn
 pandocfilters==1.5.1
     # via nbconvert
@@ -586,10 +620,12 @@ pexpect==4.9.0
     # via ipython
 pillow==10.4.0
     # via clearml
+    # via gradio
     # via imageio
     # via lightly-utils
     # via matplotlib
     # via scikit-image
+    # via sentence-transformers
     # via tensorboard-logger
     # via torchvision
 pinecone-client==5.0.1
@@ -604,6 +640,8 @@ platformdirs==3.11.0
     # via virtualenv
 pluggy==1.5.0
     # via pytest
+portalocker==2.10.1
+    # via qdrant-client
 pre-commit==3.8.0
 prettytable==3.11.0
     # via cliff
@@ -637,13 +675,22 @@ pyarrow==17.0.0
 pycocotools==2.0.8
 pycparser==2.22
     # via cffi
-pydantic==2.8.2
+pydantic==2.10.3
+    # via fastapi
+    # via gradio
     # via gto
+    # via langchain
+    # via langchain-core
+    # via langsmith
     # via lightly
-pydantic-core==2.20.1
+    # via ollama
+    # via qdrant-client
+pydantic-core==2.27.1
     # via pydantic
 pydot==3.0.1
     # via dvc
+pydub==0.25.1
+    # via gradio
 pygit2==1.15.1
     # via scmrepo
 pygments==2.18.0
@@ -658,6 +705,7 @@ pygtrie==2.5.0
     # via sqltrie
 pyjwt==2.8.0
     # via clearml
+pymongo==4.10.1
 pynndescent==0.5.13
     # via umap-learn
 pynvml==11.5.3
@@ -689,6 +737,8 @@ python-dotenv==1.0.1
     # via rootutils
 python-json-logger==2.0.7
     # via jupyter-events
+python-multipart==0.0.12
+    # via gradio
 pytorch-lightning==2.4.0
     # via lightly
     # via lightning
@@ -698,8 +748,11 @@ pyyaml==6.0.2
     # via clearml
     # via cliff
     # via datasets
+    # via gradio
     # via huggingface-hub
     # via jupyter-events
+    # via langchain
+    # via langchain-core
     # via lightning
     # via omegaconf
     # via optuna
@@ -707,17 +760,21 @@ pyyaml==6.0.2
     # via pytorch-lightning
     # via ray
     # via timm
+    # via transformers
 pyzmq==26.2.0
     # via ipykernel
     # via jupyter-client
     # via jupyter-console
     # via jupyter-server
+qdrant-client==1.12.1
 ray==2.35.0
 referencing==0.35.1
     # via clearml
     # via jsonschema
     # via jsonschema-specifications
     # via jupyter-events
+regex==2024.11.6
+    # via transformers
 requests==2.32.3
     # via clearml
     # via datasets
@@ -726,8 +783,14 @@ requests==2.32.3
     # via huggingface-hub
     # via iterative-telemetry
     # via jupyterlab-server
+    # via langchain
+    # via langsmith
     # via lightly
     # via ray
+    # via requests-toolbelt
+    # via transformers
+requests-toolbelt==1.0.0
+    # via langsmith
 rfc3339-validator==0.1.4
     # via jsonschema
     # via jupyter-events
@@ -749,6 +812,7 @@ ruamel-yaml==0.18.6
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
 ruff==0.6.3
+    # via gradio
 s3fs==2024.6.0
 s3path==0.5.8
 s3torchconnector==1.2.4
@@ -756,17 +820,22 @@ s3torchconnectorclient==1.2.4
     # via s3torchconnector
 s3transfer==0.10.2
     # via boto3
+safehttpx==0.1.6
+    # via gradio
 safetensors==0.4.4
     # via timm
+    # via transformers
 scikit-image==0.24.0
 scikit-learn==1.5.1
     # via pynndescent
+    # via sentence-transformers
     # via umap-learn
 scipy==1.14.1
     # via optuna
     # via pynndescent
     # via scikit-image
     # via scikit-learn
+    # via sentence-transformers
     # via tensorboard-logger
     # via umap-learn
 scmrepo==3.3.7
@@ -774,10 +843,13 @@ scmrepo==3.3.7
     # via dvclive
     # via gto
 seaborn==0.13.2
+semantic-version==2.10.0
+    # via gradio
 semver==3.0.2
     # via gto
 send2trash==1.8.3
     # via jupyter-server
+sentence-transformers==3.3.1
 setuptools==74.1.1
     # via grpcio-tools
     # via jupyterlab
@@ -816,11 +888,15 @@ soupsieve==2.6
     # via beautifulsoup4
 sqlalchemy==2.0.34
     # via alembic
+    # via langchain
     # via optuna
 sqltrie==0.11.1
     # via dvc-data
 stack-data==0.6.3
     # via ipython
+starlette==0.41.3
+    # via fastapi
+    # via gradio
 stevedore==5.3.0
     # via cliff
 sympy==1.13.2
@@ -828,6 +904,9 @@ sympy==1.13.2
 tabulate==0.9.0
     # via dvc
     # via gto
+tenacity==9.0.0
+    # via langchain
+    # via langchain-core
 tensorboard==2.16.2
 tensorboard-data-server==0.7.2
     # via tensorboard
@@ -842,15 +921,19 @@ tifffile==2024.8.30
 timm==1.0.9
 tinycss2==1.3.0
     # via nbconvert
+tokenizers==0.20.3
+    # via transformers
 toml==0.10.2
-tomlkit==0.13.2
+tomlkit==0.12.0
     # via dvc
+    # via gradio
 torch==2.4.0
     # via captum
     # via lightly
     # via lightning
     # via pytorch-lightning
     # via s3torchconnector
+    # via sentence-transformers
     # via timm
     # via torchmetrics
     # via torchvision
@@ -884,6 +967,8 @@ tqdm==4.66.5
     # via pinecone-client
     # via pytorch-lightning
     # via scmrepo
+    # via sentence-transformers
+    # via transformers
     # via umap-learn
 traitlets==5.14.3
     # via comm
@@ -900,9 +985,10 @@ traitlets==5.14.3
     # via nbclient
     # via nbconvert
     # via nbformat
-triton==3.0.0
-    # via torch
+transformers==4.46.3
+    # via sentence-transformers
 typer==0.12.5
+    # via gradio
     # via gto
 types-python-dateutil==2.9.0.20240821
     # via arrow
@@ -911,8 +997,12 @@ typing-extensions==4.12.2
     # via alembic
     # via asyncssh
     # via dapr
+    # via fastapi
+    # via gradio
+    # via gradio-client
     # via huggingface-hub
     # via ipython
+    # via langchain-core
     # via lightning
     # via lightning-utilities
     # via pinecone-client
@@ -937,8 +1027,11 @@ urllib3==2.2.2
     # via dulwich
     # via lightly
     # via pinecone-client
+    # via qdrant-client
     # via requests
     # via types-requests
+uvicorn==0.32.1
+    # via gradio
 vine==5.1.0
     # via amqp
     # via celery
@@ -959,6 +1052,8 @@ webencodings==0.5.1
     # via tinycss2
 websocket-client==1.8.0
     # via jupyter-server
+websockets==12.0
+    # via gradio-client
 werkzeug==3.0.4
     # via tensorboard
 widgetsnbextension==4.0.13

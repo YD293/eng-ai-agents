@@ -1,20 +1,27 @@
-# Introduction
 
-## What is this repository?
+## Start clearml server
 
-This is a template docker-based dev environment. It currently supports NVIDIA GPUs but with slight modifications it can target for x86 CPUs and Apple silicon chips. 
+1. Install clearml server.
+2. Change CLEARML_API_ACCESS_KEY and CLEARML_API_SECRET_KEY in docker-compose-local.yaml
 
-It currently includes the following tools:
+### Install ollama
 
-* an empty library called `artagents`  where you can include your code / logic that you want to import across assignments and projects.
-* a `assignments` directory with an empty notebook where you need to populate with your code. The notebook can optionally use the artagents library. 
-* a `project` directory for your project source code. The documentation for the project is stored separately in the `docs` directory. 
-* a `docs` directory that contains the source code of a [quarto](https://quarto.org/) based publishing system with markdown (qmd) and `ipynb` notebooks content. You use the docs folder to publish your project work. 
-* an empty CLI tool that should be based on `typer` and you can optionally use to implement a CLI for your project or assignments. 
-* a `tests` directory that should contains `pytest` based tests  for your `artagents` library and all other code.
+1. Install ollama.
+2. use llama3.1 model: `ollama run llama3.1`
 
-## What should I do with it?
+## Run the code by docker compose
 
-* Follow all instructions under [resources in the class website](https://pantelis.github.io/aiml-common/resources/environment/) as you will need it to submit your work. 
-* Familiarize yourself with the `rye` package manager as you will use it it build the library and manage all your dependencies. 
-* Follow the instructions in the course web site under resources to [submit your repo to the course's LLM system](https://pantelis.github.io/aiml-common/resources/environment/assignment-submission.html) (Canvas/Brightspace). 
+### Start docker compose
+
+```bash
+docker compose -f docker-compose-local.yaml build
+docker compose -f docker-compose-local.yaml up
+```
+
+### Question and answer
+
+1. Tell me how can I navigate to a specific pose - include replanning aspects in your answer.
+![q1](./q1.png)
+
+2. Can you provide me with code for this task?
+![q2](./q2.png)
